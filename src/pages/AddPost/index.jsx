@@ -115,7 +115,7 @@ export const AddPost = () => {
           </Button>
           <img
             className={styles.image}
-            src={`https://mern-backend-part.onrender.com${imageUrl}`}
+            src={`${process.env.REACT_APP_API}${imageUrl}`}
             alt="Uploaded"
           />
         </>

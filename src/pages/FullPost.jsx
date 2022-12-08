@@ -34,7 +34,7 @@ export const FullPost = () => {
       <Post
         _id={data._id}
         title={data.title}
-        imageUrl={data.imageUrl ? `https://mern-backend-part.onrender.com${data.imageUrl}` : ''}
+        imageUrl={data.imageUrl ? `${process.env.REACT_APP_API}${data.imageUrl}` : ''}
         user={data.user}
         createdAt={data.createdAt}
         viewsCount={data.viewsCount}
@@ -63,7 +63,7 @@ export const FullPost = () => {
         isLoading={false}>
         <AddComment
           title={data.title}
-          imageUrl={data.imageUrl ? `https://mern-backend-part.onrender.com${data.imageUrl}` : ''}
+          imageUrl={data.imageUrl ? `${process.env.REACT_APP_API}${data.imageUrl}` : ''}
           tags={data.tags.toString()}
           text={data.text}
         />

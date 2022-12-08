@@ -30,9 +30,7 @@ const Tags = () => {
               <Post
                 _id={obj._id}
                 title={obj.title}
-                imageUrl={
-                  obj.imageUrl ? `https://mern-backend-part.onrender.com${obj.imageUrl}` : ''
-                }
+                imageUrl={obj.imageUrl ? `${process.env.REACT_APP_API}${obj.imageUrl}` : ''}
                 user={obj.user}
                 createdAt={obj.createdAt}
                 viewsCount={obj.viewsCount}
