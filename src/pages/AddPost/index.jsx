@@ -25,8 +25,6 @@ export const AddPost = () => {
   const isEditing = Boolean(id);
 
   const handleChangeFile = async (event) => {
-    console.log(event.target.files);
-
     try {
       const formData = new FormData();
       const file = event.target.files[0];
@@ -115,7 +113,11 @@ export const AddPost = () => {
           <Button variant="contained" color="error" onClick={onClickRemoveImage}>
             Удалить
           </Button>
-          <img className={styles.image} src={`http://localhost:5000${imageUrl}`} alt="Uploaded" />
+          <img
+            className={styles.image}
+            src={`https://mern-backend-part.onrender.com${imageUrl}`}
+            alt="Uploaded"
+          />
         </>
       )}
       <br />

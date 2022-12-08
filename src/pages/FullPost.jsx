@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Post } from '../components/Post';
-import { Index } from '../components/AddComment';
+import { AddComment } from '../components/AddComment';
 import { CommentsBlock } from '../components/CommentsBlock';
 import { useParams } from 'react-router-dom';
 import axios from '../axios';
@@ -28,13 +28,13 @@ export const FullPost = () => {
   if (isLoading) {
     return <Post isLoading={isLoading} isFu llPost />;
   }
+  console.log(data.tags);
   return (
     <>
       <Post
         _id={data._id}
         title={data.title}
-        imageUrl={data.imageUrl ? `http://localhost:5000${data.imageUrl}` : ''}
-        // imageUrl="https://res.cloudinary.com/practicaldev/image/fetch/s--UnAfrEG8--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/icohm5g0axh9wjmu4oc3.png"
+        imageUrl={data.imageUrl ? `https://mern-backend-part.onrender.com${data.imageUrl}` : ''}
         user={data.user}
         createdAt={data.createdAt}
         viewsCount={data.viewsCount}
@@ -61,7 +61,12 @@ export const FullPost = () => {
           },
         ]}
         isLoading={false}>
-        <Index />
+        <AddComment
+          title={data.title}
+          imageUrl={data.imageUrl ? `https://mern-backend-part.onrender.com${data.imageUrl}` : ''}
+          tags={data.tags.toString()}
+          text={data.text}
+        />
       </CommentsBlock>
     </>
   );

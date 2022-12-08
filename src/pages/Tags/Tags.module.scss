@@ -1,0 +1,12 @@
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  h1 {
+    text-transform: uppercase;
+    span {
+      color: rgb(0, 110, 255);
+    }
+  }
+}

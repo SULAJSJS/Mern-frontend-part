@@ -8,29 +8,35 @@ import { TagsBlock } from '../components/TagsBlock';
 import { CommentsBlock } from '../components/CommentsBlock';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPosts, fetchTagses } from '../store/slices/posts';
+import { fetchPosts, fetchTagses, setOrder } from '../store/slices/posts';
 
 export const Home = () => {
   const dispatch = useDispatch();
   const { posts, tags } = useSelector((state) => state.posts);
   const userData = useSelector((state) => state.auth.data);
+  const [tab, setTab] = React.useState(0);
 
   const isPostsLoading = posts.status === 'loading';
   const isTagsLoading = tags.status === 'loading';
 
-  useEffect(() => {
-    dispatch(fetchPosts());
-    dispatch(fetchTagses());
-  }, []);
-  console.log('TAGS', tags);
-
-  console.log('DATA', posts.items);
+  const handleFetchPopular = () => {
+    setTab(1);
+    setTimeout(() => {
+      dispatch(setOrder(2));
+    }, 500);
+  };
+  const handleFetchNew = () => {
+    setTab(0);
+    setTimeout(() => {
+      dispatch(setOrder(null));
+    }, 500);
+  };
 
   return (
     <>
-      <Tabs style={{ marginBottom: 15 }} value={0} aria-label="basic tabs example">
-        <Tab label="Новые" />
-        <Tab label="Популярные" />
+      <Tabs style={{ marginBottom: 15 }} value={tab} aria-label="basic tabs example">
+        <Tab label="Новые" onClick={handleFetchNew} />
+        <Tab label="Популярные" onClick={handleFetchPopular} />
       </Tabs>
       <Grid container spacing={4}>
         <Grid xs={8} item>
@@ -41,7 +47,9 @@ export const Home = () => {
               <Post
                 _id={obj._id}
                 title={obj.title}
-                imageUrl={obj.imageUrl ? `http://localhost:5000${obj.imageUrl}` : ''}
+                imageUrl={
+                  obj.imageUrl ? `https://mern-backend-part.onrender.com${obj.imageUrl}` : ''
+                }
                 user={obj.user}
                 createdAt={obj.createdAt}
                 viewsCount={obj.viewsCount}
